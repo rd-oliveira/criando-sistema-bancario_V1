@@ -1,4 +1,4 @@
-# Desafio: Criando um Sistema Bancário
+# 💵 Desafio: Criando um Sistema Bancário 💵
 
 ## Objetivo Geral
 
