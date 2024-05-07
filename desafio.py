@@ -76,6 +76,8 @@ while True:
                             sleep(2)
                             system("cls") or None
                             break
+                        elif sacar > 500:
+                            print("Não é possivel sacar q")
                         else:
                             print("Você não possui saldo suficiente em conta...")
                             sleep(2)
