@@ -28,19 +28,20 @@ while True:
             system("cls") or None
             print("Deposito:\n*********\n")
 
-            depositar = int(input("Valor a depositar R$"))
+            depositar = float(input("Valor a depositar R$"))
 
             while True:
                 resposta_deposito = int(
                     input(
-                        f"Confirmar o deposito de valor R${depositar}\n[1] Sim [2] Não\n:"
+                        f"Confirmar o deposito de valor R${str(depositar).replace(".", ",")}\n[1] Sim [2] Não\n:"
                     )
                 )
 
                 if resposta_deposito == 1:
+                    float(depositar)
                     saldo += depositar
                     numero_saques += 1
-                    extrato += f"Depositado R${float(depositar):.2f}\n"
+                    extrato += f"Depositado R${str(depositar).replace(".", ",")}\n"
                     print("Depósito concluído com sucesso...")
                     sleep(2)
                     system("cls") or None
@@ -59,25 +60,33 @@ while True:
         elif opcao == 2:
             system("cls") or None
             print("Saque:\n******\n")
-            sacar = int(input("Valor a sacar R$"))
+            sacar = float(input("Valor a sacar R$"))
 
             while True:
                 resposta_saque = int(
-                    input(f"\nConfirmar o saque de R${sacar:.2f}?\n[1] Sim [2] Não\n:")
+                    input(f"\nConfirmar o saque de R${str(sacar).replace(".", ",")}?\n[1] Sim [2] Não\n:")
                 )
 
                 if resposta_saque == 1:
                     if numero_saques <= LIMITE_SAQUES:
-                        if saldo >= sacar:
+                        if saldo >= sacar and sacar <= 500:
+                            float(sacar)
                             saldo -= sacar
                             numero_saques += 1
-                            extrato += f"Saque R${float(sacar):.2f}\n"
+                            extrato += f"Saque R${str(sacar).replace(".", ",")}\n"
                             print("Saque concluído com sucesso...")
                             sleep(2)
                             system("cls") or None
                             break
-                        elif sacar > 500:
-                            print("Não é possivel sacar q")
+
+                        elif sacar > 500 and saldo > 500:
+                            print(
+                                'O limite por tentativa de saque é de R$500,00... Por favor tente novamente!"'
+                            )
+                            sleep(2)
+                            system("cls") or None
+                            break
+
                         else:
                             print("Você não possui saldo suficiente em conta...")
                             sleep(2)
@@ -110,7 +119,7 @@ while True:
             if extrato == "":
                 print("Não foram realizadas movimentações")
             else:
-                print(extrato, f"\nSaldo: R${float(saldo):.2f}")
+                print(extrato, f"\nSaldo: R${str(saldo).replace(".", ",")}")
             sleep(5)
             system("cls") or None
 
